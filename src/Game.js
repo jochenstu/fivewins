@@ -54,11 +54,14 @@ class Board extends Component {
 // Game
 //
 class Game extends Component {
+
   constructor(props) {
     super(props);
 
+    this.fieldSize = props.fieldSize;
+
     this.state = {
-      fields: Array(144).fill(null),
+      fields: Array(this.fieldSize).fill(null),
       nextPlayer: 1,
     }
   }
@@ -92,3 +95,7 @@ class Game extends Component {
 }
 
 export default Game;
+
+function checkWin() {
+  
+}
