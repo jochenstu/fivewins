@@ -94,7 +94,7 @@ class Game extends Component {
 
   checkValid(field) {
     const fields = this.state.fields;
-    console.log(field);
+
     if (
       (
         typeof(fields[field+1]) !== 'undefined' || 
@@ -147,7 +147,7 @@ class Game extends Component {
       if (fields[i] === requiredState) {
         if (
           (i%12 < 8 && fields[i+1] === requiredState && fields[i+2] === requiredState && fields[i+3] === requiredState && fields[i+4] === requiredState) ||
-          (i < 96 && fields[i+12] == requiredState && fields[i+24] === requiredState && fields[i+36] === requiredState && fields[i+48] === requiredState) ||
+          (i < 96 && fields[i+12] === requiredState && fields[i+24] === requiredState && fields[i+36] === requiredState && fields[i+48] === requiredState) ||
           (i < 92 && i%12 < 8 && fields[i+13] === requiredState && fields[i+26] === requiredState && fields[i+39] === requiredState && fields[i+52] === requiredState) ||
           (i < 96 && i%12 > 3 && fields[i+11] === requiredState && fields[i+22] === requiredState && fields[i+33] === requiredState && fields[i+44] === requiredState)
         ) {
