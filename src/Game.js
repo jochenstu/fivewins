@@ -59,7 +59,7 @@ class Game extends Component {
     super(props);
 
     this.state = {
-      fields: [],
+      fields: Array(props.fieldSize).fill(''),
       nextPlayer: 1,
     }
   }
@@ -95,28 +95,28 @@ class Game extends Component {
 
     if (
       (
-        typeof(fields[field+1]) !== 'undefined' || 
-        typeof(fields[field-1]) !== 'undefined' ||
-        typeof(fields[field+factor]) !== 'undefined' ||
-        typeof(fields[field-factor]) !== 'undefined'
+        fields[field+1] !== '' || 
+        fields[field-1] !== '' ||
+        fields[field+factor] !== '' ||
+        fields[field-factor] !== ''
       ) && 
-      typeof(fields[field]) === 'undefined'
+      fields[field] === ''
     ) {
 
       if (
         field%factor === 0 &&
-        typeof(fields[field+1]) === 'undefined' &&
-        typeof(fields[field+factor]) === 'undefined' &&
-        typeof(fields[field-factor]) === 'undefined'
+        fields[field+1] === '' &&
+        fields[field+factor] === '' &&
+        fields[field-factor] === ''
       ) {
         return false;
       }
 
       if (
         field%factor === factor-1 &&
-        typeof(fields[field-1]) === 'undefined' &&
-        typeof(fields[field+factor]) === 'undefined' &&
-        typeof(fields[field-factor]) === 'undefined'
+        fields[field-1] === '' &&
+        fields[field+factor] === '' &&
+        fields[field-factor] === ''
       ) {
         return false;
       }
@@ -126,7 +126,7 @@ class Game extends Component {
 
     let newGame = 1;
     for (let i = 0; i < this.props.fieldSize; i++) {
-      if (typeof(fields[i]) !== 'undefined') {
+      if (fields[i] !== '') {
         newGame = 0;
       }
     }
