@@ -94,31 +94,32 @@ class Game extends Component {
 
   isMoveValid(field) {
     const fields = this.state.fields;
+    let factor = Math.sqrt(this.fieldSize);
 
     if (
       (
         typeof(fields[field+1]) !== 'undefined' || 
         typeof(fields[field-1]) !== 'undefined' ||
-        typeof(fields[field+12]) !== 'undefined' ||
-        typeof(fields[field-12]) !== 'undefined'
+        typeof(fields[field+factor]) !== 'undefined' ||
+        typeof(fields[field-factor]) !== 'undefined'
       ) && 
       typeof(fields[field]) === 'undefined'
     ) {
 
       if (
-        field%12 === 0 &&
+        field%factor === 0 &&
         typeof(fields[field+1]) === 'undefined' &&
-        typeof(fields[field+12]) === 'undefined' &&
-        typeof(fields[field-12]) === 'undefined'
+        typeof(fields[field+factor]) === 'undefined' &&
+        typeof(fields[field-factor]) === 'undefined'
       ) {
         return false;
       }
 
       if (
-        field%12 === 11 &&
+        field%factor === factor-1 &&
         typeof(fields[field-1]) === 'undefined' &&
-        typeof(fields[field+12]) === 'undefined' &&
-        typeof(fields[field-12]) === 'undefined'
+        typeof(fields[field+factor]) === 'undefined' &&
+        typeof(fields[field-factor]) === 'undefined'
       ) {
         return false;
       }
