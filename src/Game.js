@@ -101,7 +101,11 @@ class Game extends Component {
 
         this.setState({fields: fields});
 
-        if(this.checkWin(player)) {
+        let won = this.checkWin(player);
+        if(won) {
+          for (let i=0; i < 5; i++) {
+            fields[won[i]] = fields[won[i]]+' c-field--winner';
+          }
           winner = player;
         } 
 
