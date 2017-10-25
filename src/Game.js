@@ -67,7 +67,7 @@ class Game extends Component {
   handleClick(i) {
     const fields = this.state.fields;
     var nextPlayer = this.state.nextPlayer;
-    let player = nextPlayer;
+    const player = nextPlayer;
 
     if (this.isMoveValid(i)) {
       if (nextPlayer < this.props.players) {
@@ -91,7 +91,7 @@ class Game extends Component {
 
   isMoveValid(field) {
     const fields = this.state.fields;
-    let factor = Math.sqrt(this.props.fieldSize);
+    const factor = Math.sqrt(this.props.fieldSize);
 
     if (
       (
@@ -125,7 +125,7 @@ class Game extends Component {
     }
 
     let newGame = 1;
-    for (var i = 0; i < this.props.fieldSize; i++) {
+    for (let i = 0; i < this.props.fieldSize; i++) {
       if (typeof(fields[i]) !== 'undefined') {
         newGame = 0;
       }
@@ -140,11 +140,11 @@ class Game extends Component {
 
   checkWin(player) {
     const fields = this.state.fields;
-    let requiredState = 'c-field--p'+player;
-    let factor = Math.sqrt(this.props.fieldSize);
-    let maxCheckField = this.props.fieldSize - (factor*4);
+    const requiredState = 'c-field--p'+player;
+    const factor = Math.sqrt(this.props.fieldSize);
+    const maxCheckField = this.props.fieldSize - (factor*4);
 
-    for (var i = 0; i < this.props.fieldSize; i++) {
+    for (let i = 0; i < this.props.fieldSize; i++) {
       if (fields[i] === requiredState) {
         if (
           (i < this.props.fieldSize-4 && i%factor < factor-4 && fields[i+1] === requiredState && fields[i+2] === requiredState && fields[i+3] === requiredState && fields[i+4] === requiredState) ||
