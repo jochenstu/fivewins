@@ -93,31 +93,13 @@ class Game extends Component {
     const fields = this.state.fields;
     const factor = Math.sqrt(this.props.fieldSize);
 
-    if (
-      (
-        fields[field+1] !== '' || 
-        fields[field-1] !== '' ||
-        fields[field+factor] !== '' ||
-        fields[field-factor] !== ''
-      ) && 
-      fields[field] === ''
-    ) {
+    if ((fields[field+1] !== '' || fields[field-1] !== '' || fields[field+factor] !== '' || fields[field-factor] !== '') && fields[field] === '') {
 
-      if (
-        field%factor === 0 &&
-        fields[field+1] === '' &&
-        fields[field+factor] === '' &&
-        fields[field-factor] === ''
-      ) {
+      if (field%factor === 0 && fields[field+1] === '' && fields[field+factor] === '' && fields[field-factor] === '') {
         return false;
       }
 
-      if (
-        field%factor === factor-1 &&
-        fields[field-1] === '' &&
-        fields[field+factor] === '' &&
-        fields[field-factor] === ''
-      ) {
+      if (field%factor === factor-1 && fields[field-1] === '' && fields[field+factor] === '' && fields[field-factor] === '' ) {
         return false;
       }
 
@@ -128,6 +110,7 @@ class Game extends Component {
     for (let i = 0; i < this.props.fieldSize; i++) {
       if (fields[i] !== '') {
         newGame = 0;
+        break;
       }
     }
 
