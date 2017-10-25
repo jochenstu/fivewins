@@ -1,0 +1,79 @@
+/*
+ * Field
+ */
+
+.c-field {
+    background: #303036;
+}
+
+    .c-field--p1,
+    .c-field--p2 {
+        box-shadow: 0px -3px rgba(0,0,0,.3) inset;
+    }
+
+    .c-field--p1 {
+        background: #0FE;
+        box-shadow: 0px -3px rgba(0,0,0,.25) inset;
+    }
+
+    .c-field--p2 {
+        background: #F0E;
+    }
+
+
+
+/*
+ * Board
+ */
+
+.c-board {
+    justify-content: center;
+    align-content: center;
+    display: grid;
+    /*max-width: 960px;*/
+    height: 100%;
+    margin: 0 auto;
+    grid-template-rows: repeat(12, 2em);
+    grid-template-columns: repeat(12, 2em);
+    /*grid-template:
+    repeat(12, 50px)
+    repeat(12, 50px);
+    /  */
+    grid-gap: .25em;
+    background: beige;
+}
+
+
+
+/*
+ * Game
+ */
+
+.c-game {
+    text-align: center;
+}
+
+.c-game-logo {
+    animation: c-game-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
+.c-game-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
+}
+
+.c-game-title {
+    font-size: 1.5em;
+}
+
+.c-game-intro {
+    font-size: large;
+}
+
+@keyframes c-game-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
