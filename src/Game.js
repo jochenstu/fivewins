@@ -71,10 +71,10 @@ class Game extends Component {
 
     if (this.isMoveValid(i)) {
       if (nextPlayer < this.props.players) {
-        fields[i] = 'c-field c-field--p'+nextPlayer;
+        fields[i] = 'c-field--p'+nextPlayer;
         nextPlayer++;
       } else {
-        fields[i] = 'c-field c-field--p'+this.props.players;
+        fields[i] = 'c-field--p'+this.props.players;
         nextPlayer = 1;
       }
 
@@ -140,7 +140,7 @@ class Game extends Component {
 
   checkWin(player) {
     const fields = this.state.fields;
-    let requiredState = 'c-field c-field--p'+player;
+    let requiredState = 'c-field--p'+player;
     let factor = Math.sqrt(this.props.fieldSize);
     let maxCheckField = this.props.fieldSize - (factor*4);
 
