@@ -5,6 +5,23 @@ import './Game.css';
 
 
 //
+// Show winner
+//
+class ShowWinner extends Component {
+  render() {
+    if (this.props.winner > 0) {
+      return (
+        <center>Winner: {this.props.winner}</center>
+      );
+    }
+
+    return null;
+  }
+}
+
+
+
+//
 // Field
 //
 class Field extends Component {
@@ -61,14 +78,16 @@ class Game extends Component {
     this.state = {
       fields: Array(props.fieldSize).fill(''),
       nextPlayer: 1,
+      winner: 0
     }
   }
 
   handleClick(i) {
     const fields = this.state.fields;
-    
+    let winner = this.state.winner;
+
     var nextPlayer = this.state.nextPlayer;
-    if (nextPlayer > 0) {
+    if (winner === 0) {
       const player = nextPlayer;
 
       if (this.isMoveValid(i)) {
@@ -83,12 +102,13 @@ class Game extends Component {
         this.setState({fields: fields});
 
         if(this.checkWin(player)) {
-          nextPlayer = 0;
-          alert('Player '+player+' wins!');
+          winner = player;
         } 
 
         this.setState({
-          nextPlayer: nextPlayer
+          fields: fields,
+          nextPlayer: nextPlayer,
+          winner: winner
         });
       }
     }
@@ -134,13 +154,20 @@ class Game extends Component {
 
     for (let i = 0; i < this.props.fieldSize; i++) {
       if (fields[i] === requiredState) {
-        if (
-          (i < this.props.fieldSize-4 && i%factor < factor-4 && fields[i+1] === requiredState && fields[i+2] === requiredState && fields[i+3] === requiredState && fields[i+4] === requiredState) ||
-          (i < maxCheckField && fields[i+factor] === requiredState && fields[i+(factor*2)] === requiredState && fields[i+(factor*3)] === requiredState && fields[i+(factor*4)] === requiredState) ||
-          (i < maxCheckField && i%factor < factor-4 && fields[i+factor+1] === requiredState && fields[i+((factor+1)*2)] === requiredState && fields[i+((factor+1)*3)] === requiredState && fields[i+((factor+1)*4)] === requiredState) ||
-          (i < maxCheckField && i%factor > 3 && fields[i+(factor-1)] === requiredState && fields[i+((factor-1)*2)] === requiredState && fields[i+((factor-1)*3)] === requiredState && fields[i+((factor-1)*4)] === requiredState)
-        ) {
-          return true;
+        let possibleWins = [
+          [i,i+1,i+3,i+4],
+          [i,i+factor,i+factor*2,i+factor*3,i+factor*4],
+          [i,i+factor+1,i+(factor+1)*2,i+(factor+1)*3,i+(factor+1)*4],
+          [i,i+factor-1,i+(factor-1)*2,(factor-1)*3,(factor-1)*4]
+        ];
+        for (let j = 0; j < 4; j++) {
+          let check = maxCheckField;
+          if (j === 0) {
+            check = this.props.fieldSize-4
+          }
+          if(i < check && fields[possibleWins[j][1]] === requiredState && fields[possibleWins[j][2]] === requiredState && fields[possibleWins[j][3]] === requiredState && fields[possibleWins[j][4]] === requiredState) {
+            return possibleWins[j];
+          }
         }
       }
     }
@@ -150,10 +177,15 @@ class Game extends Component {
 
   render() {
     return (
-      <Board
-        fields={this.state.fields}
-        onClick={i => this.handleClick(i)}
-      />
+      <div>
+        <Board
+          fields={this.state.fields}
+          onClick={i => this.handleClick(i)}
+        />
+        <ShowWinner
+          winner={this.state.winner}
+        />
+      </div>
     );
   }
 }
