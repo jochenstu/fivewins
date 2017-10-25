@@ -66,26 +66,31 @@ class Game extends Component {
 
   handleClick(i) {
     const fields = this.state.fields;
+    
     var nextPlayer = this.state.nextPlayer;
-    const player = nextPlayer;
+    if (nextPlayer > 0) {
+      const player = nextPlayer;
 
-    if (this.isMoveValid(i)) {
-      if (nextPlayer < this.props.players) {
-        fields[i] = 'c-field--p'+nextPlayer;
-        nextPlayer++;
-      } else {
-        fields[i] = 'c-field--p'+this.props.players;
-        nextPlayer = 1;
+      if (this.isMoveValid(i)) {
+        if (nextPlayer < this.props.players) {
+          fields[i] = 'c-field--p'+nextPlayer;
+          nextPlayer++;
+        } else {
+          fields[i] = 'c-field--p'+this.props.players;
+          nextPlayer = 1;
+        }
+
+        this.setState({fields: fields});
+
+        if(this.checkWin(player)) {
+          nextPlayer = 0;
+          alert('Player '+player+' wins!');
+        } 
+
+        this.setState({
+          nextPlayer: nextPlayer
+        });
       }
-
-      if(this.checkWin(player)) {
-        alert('Player '+player+' wins!');
-      }
-
-      this.setState({
-        fields: fields,
-        nextPlayer: nextPlayer,
-      });
     }
   }
 
