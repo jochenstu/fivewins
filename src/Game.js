@@ -59,7 +59,7 @@ class Game extends Component {
     super(props);
 
     this.state = {
-      fields: [],
+      fields: Array(this.props.fieldSize).fill(null),
       nextPlayer: 1,
     }
   }
@@ -95,11 +95,11 @@ class Game extends Component {
 
     if (
       (
-        typeof(fields[field+1]) !== 'undefined' || 
+        typeof(fields[field+1]) !== 'undefined' ||
         typeof(fields[field-1]) !== 'undefined' ||
         typeof(fields[field+factor]) !== 'undefined' ||
         typeof(fields[field-factor]) !== 'undefined'
-      ) && 
+      ) &&
       typeof(fields[field]) === 'undefined'
     ) {
 
