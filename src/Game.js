@@ -169,7 +169,7 @@ class Game extends Component {
           if (j === 0) {
             check = this.props.fieldSize-4
           }
-          if(i < check && fields[possibleWins[j][1]] === requiredState && fields[possibleWins[j][2]] === requiredState && fields[possibleWins[j][3]] === requiredState && fields[possibleWins[j][4]] === requiredState) {
+          if (i < check && fields[possibleWins[j][1]] === requiredState && fields[possibleWins[j][2]] === requiredState && fields[possibleWins[j][3]] === requiredState && fields[possibleWins[j][4]] === requiredState) {
             return possibleWins[j];
           }
         }
