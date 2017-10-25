@@ -59,6 +59,7 @@ class Game extends Component {
     super(props);
 
     this.fieldSize = props.fieldSize;
+    this.players   = props.players;
 
     this.state = {
       fields: Array(this.fieldSize).fill(null),
@@ -70,11 +71,11 @@ class Game extends Component {
     const fields = this.state.fields;
     var nextPlayer = this.state.nextPlayer;
 
-    if (nextPlayer === 1) {
-      fields[i] = 'c-field c-field--p1';
-      nextPlayer = 2;
+    if (nextPlayer < this.players) {
+      fields[i] = 'c-field c-field--p'+nextPlayer;
+      nextPlayer++;
     } else {
-      fields[i] = 'c-field c-field--p2';
+      fields[i] = 'c-field c-field--p'+this.players;
       nextPlayer = 1;
     }
 
@@ -95,7 +96,3 @@ class Game extends Component {
 }
 
 export default Game;
-
-function checkWin() {
-  
-}
