@@ -150,7 +150,7 @@ class Game extends Component {
     for (var i = 0; i < this.fieldSize; i++) {
       if (fields[i] === requiredState) {
         if (
-          (i < this.fieldSize-4 i%factor < factor-4 && fields[i+1] === requiredState && fields[i+2] === requiredState && fields[i+3] === requiredState && fields[i+4] === requiredState) ||
+          (i < this.fieldSize-4 && i%factor < factor-4 && fields[i+1] === requiredState && fields[i+2] === requiredState && fields[i+3] === requiredState && fields[i+4] === requiredState) ||
           (i < maxCheckField && fields[i+factor] === requiredState && fields[i+(factor*2)] === requiredState && fields[i+(factor*3)] === requiredState && fields[i+(factor*4)] === requiredState) ||
           (i < maxCheckField && i%factor < factor-4 && fields[i+factor+1] === requiredState && fields[i+((factor+1)*2)] === requiredState && fields[i+((factor+1)*3)] === requiredState && fields[i+((factor+1)*4)] === requiredState) ||
           (i < maxCheckField && i%factor > 3 && fields[i+(factor-1)] === requiredState && fields[i+((factor-1)*2)] === requiredState && fields[i+((factor-1)*3)] === requiredState && fields[i+((factor-1)*4)] === requiredState)
