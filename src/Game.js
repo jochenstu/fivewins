@@ -72,7 +72,7 @@ class Game extends Component {
     var nextPlayer = this.state.nextPlayer;
     let player = nextPlayer;
 
-    if (this.checkValid(i)) {
+    if (this.isMoveValid(i)) {
       if (nextPlayer < this.players) {
         fields[i] = 'c-field c-field--p'+nextPlayer;
         nextPlayer++;
@@ -92,7 +92,7 @@ class Game extends Component {
     }
   }
 
-  checkValid(field) {
+  isMoveValid(field) {
     const fields = this.state.fields;
 
     if (
@@ -142,14 +142,17 @@ class Game extends Component {
 
   checkWin(player) {
     const fields = this.state.fields;
-    let requiredState = 'c-field c-field--p'+player; 
+    let requiredState = 'c-field c-field--p'+player;
+    let factor = Math.sqrt(this.fieldSize);
+    let maxCheckField = this.fieldSize - (factor*4);
+
     for (var i = 0; i < this.fieldSize; i++) {
       if (fields[i] === requiredState) {
         if (
-          (i%12 < 8 && fields[i+1] === requiredState && fields[i+2] === requiredState && fields[i+3] === requiredState && fields[i+4] === requiredState) ||
-          (i < 96 && fields[i+12] === requiredState && fields[i+24] === requiredState && fields[i+36] === requiredState && fields[i+48] === requiredState) ||
-          (i < 92 && i%12 < 8 && fields[i+13] === requiredState && fields[i+26] === requiredState && fields[i+39] === requiredState && fields[i+52] === requiredState) ||
-          (i < 96 && i%12 > 3 && fields[i+11] === requiredState && fields[i+22] === requiredState && fields[i+33] === requiredState && fields[i+44] === requiredState)
+          (i < this.fieldSize-4 i%factor < factor-4 && fields[i+1] === requiredState && fields[i+2] === requiredState && fields[i+3] === requiredState && fields[i+4] === requiredState) ||
+          (i < maxCheckField && fields[i+factor] === requiredState && fields[i+(factor*2)] === requiredState && fields[i+(factor*3)] === requiredState && fields[i+(factor*4)] === requiredState) ||
+          (i < maxCheckField && i%factor < factor-4 && fields[i+factor+1] === requiredState && fields[i+((factor+1)*2)] === requiredState && fields[i+((factor+1)*3)] === requiredState && fields[i+((factor+1)*4)] === requiredState) ||
+          (i < maxCheckField && i%factor > 3 && fields[i+(factor-1)] === requiredState && fields[i+((factor-1)*2)] === requiredState && fields[i+((factor-1)*3)] === requiredState && fields[i+((factor-1)*4)] === requiredState)
         ) {
           return true;
         }
